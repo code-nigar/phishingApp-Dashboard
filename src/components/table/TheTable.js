@@ -14,7 +14,6 @@ import {
   AccordionDetails,
   Typography,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import axios from 'axios';
 
 const columns = [
@@ -31,6 +30,7 @@ const ResponsiveTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loading, setLoading] = useState(true);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,21 +59,27 @@ const ResponsiveTable = () => {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    setSelectedRow(null); 
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    setSelectedRow(null);
+  };
+
+  const handleRowClick = (row) => {
+    setSelectedRow(selectedRow === row ? null : row);
   };
 
   const renderDetailsRow = (row) => {
-    return (
+    return selectedRow === row ? (
       <TableRow key={row.id}>
         <TableCell colSpan={6}>
           <Accordion style={{backgroundColor: "var(--color-background2)"}}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+            {/* <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
               <Typography>Details</Typography>
-            </AccordionSummary>
+            </AccordionSummary> */}
             <AccordionDetails>
               <Typography>
                 Campaign Created Time: {row.campaignCreatedTime}<br />
@@ -86,8 +92,31 @@ const ResponsiveTable = () => {
           </Accordion>
         </TableCell>
       </TableRow>
-    );
+    ) : null;
   };
+
+//   const renderDetailsRow = (row) => {
+//     return (
+//       <TableRow key={row.id}>
+//         <TableCell colSpan={6}>
+//           <Accordion style={{backgroundColor: "var(--color-background2)"}}>
+//             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+//               <Typography>Details</Typography>
+//             </AccordionSummary>
+//             <AccordionDetails>
+//               <Typography>
+//                 Campaign Created Time: {row.campaignCreatedTime}<br />
+//                 Email Sent: {row.emailSent}<br />
+//                 Email Opened: {row.emailOpened}<br />
+//                 Clicked Link: {row.clickedLink}<br />
+//                 Submitted Data: {row.submittedData}
+//               </Typography>
+//             </AccordionDetails>
+//           </Accordion>
+//         </TableCell>
+//       </TableRow>
+//     );
+//   };
 
   return (
     <Paper style={{borderRadius: 'var(--card-border-radius)', boxShadow: 'var(--box-shadow)'}}>
@@ -95,7 +124,7 @@ const ResponsiveTable = () => {
         <CircularProgress />
       ) : (
         <>
-          <TableContainer style={{ maxHeight: '50vh', overflowY: 'auto', overflowX: 'auto', borderRadius: 'var(--card-border-radius)' }}> 
+          <TableContainer style={{ maxHeight: '51vh', overflowY: 'auto', overflowX: 'auto', borderRadius: 'var(--card-border-radius)' }}> 
             <Table stickyHeader>
               <TableHead style={{ borderBottom: '4px solid var(--color-dark)'}}>
                 <TableRow>
@@ -108,14 +137,14 @@ const ResponsiveTable = () => {
               </TableHead>
               <TableBody>
                 {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                  <>
-                    <TableRow key={row.id}>
-                      {columns.map((column) => (
-                        <TableCell key={column.id}>{row[column.id]}</TableCell>
-                      ))}
-                    </TableRow>
-                    {renderDetailsRow(row)}
-                  </>
+                  <React.Fragment key={row.id}>
+                  <TableRow onClick={() => handleRowClick(row)} sx={{ cursor: 'pointer' , '&:hover': { backgroundColor: 'var(--color-light)' } }}>
+                    {columns.map((column) => (
+                      <TableCell key={column.id}>{row[column.id]}</TableCell>
+                    ))}
+                  </TableRow>
+                  {renderDetailsRow(row)}
+                </React.Fragment>
                 ))}
               </TableBody>
             </Table>

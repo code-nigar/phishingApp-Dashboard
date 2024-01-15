@@ -34,7 +34,47 @@ export default function Dashboard() {
 
   return (
     <main>
+        <div className='dashboard-top'>
         <h1>Dashboard</h1>
+        <div className='filter'>
+            <div className='filter-form'>           
+                <FormControl sx={{ m:1,mt:2, minWidth:150, border: 'none', borderRadius: 'var(--card-border-radius)' }}>
+                    <InputLabel id="demo-simple-select-helper-label">Campaign</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={age}
+                    label="Age"
+                    onChange={handleAge}
+                    >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl sx={{ m:1, mt:2, minWidth:150, borderRadius: 'var(--card-border-radius)' }}>
+                    <InputLabel id="demo-simple-select-helper-label">ID</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={age}
+                    label="Age"
+                    onChange={handleAge}
+                    >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+        </div>
+        </div>
         <div className="analyse">
             <div className="sales">
                 <div className="status">
@@ -135,44 +175,6 @@ export default function Dashboard() {
                         } 
                     />
                 </div>
-            </div>
-        </div>
-        <div className='filter'>
-            <div className='filter-form'>           
-                <FormControl sx={{ m:1,mt:2, minWidth:150, border: 'none', borderRadius: 'var(--card-border-radius)' }}>
-                    <InputLabel id="demo-simple-select-helper-label">Campaign</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={age}
-                    label="Age"
-                    onChange={handleAge}
-                    >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControl sx={{ m:1, mt:2, minWidth:150, borderRadius: 'var(--card-border-radius)' }}>
-                    <InputLabel id="demo-simple-select-helper-label">ID</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={age}
-                    label="Age"
-                    onChange={handleAge}
-                    >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
             </div>
         </div>
         <div className="recent-orders">

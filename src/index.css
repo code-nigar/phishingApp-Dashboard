@@ -349,7 +349,7 @@ main .new-users .user-list .user img{
 }
 
 main .recent-orders{
-    margin-top: -0.3rem;
+    margin-top: 1.3rem;
 }
 
 main .recent-orders h2{
@@ -724,4 +724,11 @@ main .recent-orders a{
 
 .filter-form{
   justify-self: end;
+}
+
+.dashboard-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
